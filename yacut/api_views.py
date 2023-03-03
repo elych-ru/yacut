@@ -11,7 +11,7 @@ from .utils import is_url
 from settings import RE_SHORT_LNK_SYMBOLS_ALLOWED
 
 
-@app.route('/api/id/<string:short_id>/', methods=['GET'])
+@app.route("/api/id/<string:short_id>/", methods=["GET"])
 def get_url_by_short_id(short_id: str) -> Tuple:
     url_map = URLMap.query.filter_by(short=short_id).first()
     if url_map is None:
@@ -19,7 +19,7 @@ def get_url_by_short_id(short_id: str) -> Tuple:
     return jsonify({"url": url_map.original}), 200
 
 
-@app.route('/api/id/', methods=['POST'])
+@app.route("/api/id/", methods=["POST"])
 def add_link() -> Tuple:
     data = request.get_json()
     if not data:
