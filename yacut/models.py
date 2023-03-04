@@ -1,13 +1,19 @@
 from datetime import datetime
 from typing import Dict
 
-from . import db
+from yacut import db
+from settings import MAX_LINK_LENGTH, MAX_SHORT_ID_LENGTH
 
 
 class URLMap(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    original = db.Column(db.String(256), nullable=False)
-    short = db.Column(db.String(16), nullable=False, index=True, unique=True)
+    original = db.Column(db.String(MAX_LINK_LENGTH), nullable=False)
+    short = db.Column(
+        db.String(MAX_SHORT_ID_LENGTH),
+        nullable=False,
+        index=True,
+        unique=True,
+    )
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self) -> Dict:
