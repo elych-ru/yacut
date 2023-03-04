@@ -12,3 +12,8 @@ class Config(object):
 INDEX_TEMPLATE = "index.html"
 # регулярка, допускающая только символы A-Z, a-z, 0-9 в строке
 RE_SHORT_LNK_SYMBOLS_ALLOWED = r"^[A-Za-z\d]+$"
+# ограничения на длину строк
+# для ссылки
+MAX_LINK_LENGTH = 256
+# для короткого ID
+MAX_SHORT_ID_LENGTH = 16

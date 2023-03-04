@@ -1,12 +1,13 @@
 from typing import Dict, Tuple, Union
+from http import HTTPStatus
 
 from flask import jsonify, render_template
 
-from . import app, db
+from yacut import app, db
 
 
 class InvalidAPIUsage(Exception):
-    status_code: int = 400
+    status_code: int = HTTPStatus.BAD_REQUEST
     message: str
 
     def __init__(self, message: str, status_code: Union[int, None] = None):
@@ -28,12 +29,12 @@ def invalid_api_usage(error: InvalidAPIUsage) -> Tuple:
     return jsonify(error.to_dict()), error.status_code
 
 
-@app.errorhandler(404)
+@app.errorhandler(HTTPStatus.NOT_FOUND)
 def page_not_found(error: BaseException) -> Tuple:
-    return render_template('404.html'), 404
+    return render_template("404.html"), HTTPStatus.NOT_FOUND
 
 
-@app.errorhandler(500)
+@app.errorhandler(HTTPStatus.INTERNAL_SERVER_ERROR)
 def internal_error(error: BaseException) -> Tuple:
     db.session.rollback()
-    return render_template('500.html'), 500
+    return render_template("500.html"), HTTPStatus.INTERNAL_SERVER_ERROR
