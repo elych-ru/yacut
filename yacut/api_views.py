@@ -9,7 +9,7 @@ from yacut.error_handlers import InvalidAPIUsage, ShortLinkGenerationError
 from yacut.models import URLMap
 from yacut.views import gen_short_unique_link, check_short_id_exists
 from yacut.utils import is_url
-from settings import RE_SHORT_LNK_SYMBOLS_ALLOWED, MAX_SHORT_ID_LENGTH
+from yacut.settings import RE_SHORT_LNK_SYMBOLS_ALLOWED, MAX_SHORT_ID_LENGTH
 
 
 @app.route("/api/id/<string:short_id>/", methods=("GET",))
@@ -33,8 +33,8 @@ def add_link() -> Tuple:
     if "custom_id" in data and data["custom_id"]:
         short_id = data["custom_id"]
         if (
-            len(short_id) > MAX_SHORT_ID_LENGTH or
-            re.match(RE_SHORT_LNK_SYMBOLS_ALLOWED, short_id) is None
+            len(short_id) > MAX_SHORT_ID_LENGTH
+            or re.match(RE_SHORT_LNK_SYMBOLS_ALLOWED, short_id) is None
         ):
             raise InvalidAPIUsage("Указано недопустимое имя для короткой ссылки")
         if check_short_id_exists(short_id):

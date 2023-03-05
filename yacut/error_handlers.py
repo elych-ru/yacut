@@ -7,10 +7,9 @@ from yacut import app, db
 
 
 class InvalidAPIUsage(Exception):
-    status_code: int = HTTPStatus.BAD_REQUEST
-    message: str
-
-    def __init__(self, message: str, status_code: Union[int, None] = None):
+    def __init__(
+        self, message: str, status_code: Union[int, None] = HTTPStatus.BAD_REQUEST
+    ):
         super().__init__()
         self.message = message
         if status_code is not None:

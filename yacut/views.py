@@ -7,7 +7,7 @@ from yacut.error_handlers import ShortLinkGenerationError
 from yacut.forms import URLMapForm
 from yacut.models import URLMap
 from yacut.utils import gen_random_str
-from settings import INDEX_TEMPLATE
+from yacut.settings import INDEX_TEMPLATE
 
 
 def check_short_id_exists(short_id: str) -> bool:

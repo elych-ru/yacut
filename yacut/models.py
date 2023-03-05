@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Dict
 
 from yacut import db
-from settings import MAX_LINK_LENGTH, MAX_SHORT_ID_LENGTH
+from yacut.settings import MAX_LINK_LENGTH, MAX_SHORT_ID_LENGTH
 
 
 class URLMap(db.Model):
