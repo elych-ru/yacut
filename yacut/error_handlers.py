@@ -12,8 +12,7 @@ class InvalidAPIUsage(Exception):
     ):
         super().__init__()
         self.message = message
-        if status_code is not None:
-            self.status_code = status_code
+        self.status_code = status_code
 
     def to_dict(self) -> Dict:
         return dict(message=self.message)
